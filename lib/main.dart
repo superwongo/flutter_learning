@@ -1,52 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final appName = 'Custom Theme';
+    var title = 'Web Images';
 
     return MaterialApp(
-      title: appName,
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Colors.lightBlue[800],
-        accentColor: Colors.cyan[600],
-      ),
-      home: MyHomePage(
-        title: appName,
-      ),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  final String title;
-  
-  const MyHomePage({Key key, @required this.title}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Center(
-        child: Container(
-          color: Theme.of(context).accentColor,
-          child: Text(
-            'Text with a background color',
-            style: Theme.of(context).textTheme.title,
-          ),
+      title: title,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(title),
         ),
-      ),
-      floatingActionButton: Theme(
-        data: Theme.of(context).copyWith(accentColor: Colors.yellow),
-        child: FloatingActionButton(
-          onPressed: null,
-          child: Icon(Icons.add),
+        body: Stack(
+          children: <Widget>[
+            new Center(child: new CircularProgressIndicator()),
+            new Center(
+              child: new FadeInImage.memoryNetwork(
+                placeholder: kTransparentImage,
+                image:
+                    'https://avatar.csdn.net/8/C/A/3_sdwang198912.jpg?raw=true',
+              ),
+            ),
+          ],
         ),
       ),
     );
